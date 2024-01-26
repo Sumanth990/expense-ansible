@@ -1,24 +1,24 @@
-- Name: MySQL setup
+- name: MySQL setup
   hosts: all
   become: true
   tasks:
-    - Name: Disable default version of MySQL module
-      ansible.builtin.shell: dnf module disable mysql
+    - name: Disable default version of MySQL module
+      ansible.builtin.shell: dnf module disable mysql -y
 
-    - Name: Copy Mysql repo file
+    - name: Copy Mysql repo file
       ansible.builtin.copy:
         src: mysql.repo
         dest: /etc/yum.repos.d/mysql.repo
 
-    - Name: Install mysql server
+    - name: Install mysql server
       ansible.builtin.dnf:
         name: mysql-community-server #Name of the package
         state: Installed
 
-    - Name: Start enable service
+    - name: Start enable service
       ansible.builtin.systemd_service:
-        name: mysqld # Service name
+        name: mysqld  #Service name
         state: restarted
 
-    - Name: Set Mysql root password
+    - name: Set Mysql root password
       ansible.builtin.shell: mysql_secure_installation --set-root-pass ExpenseApp@1
