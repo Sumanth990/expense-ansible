@@ -1,28 +1,4 @@
-#MySQL_PASSWORD=$1
-#
-#if [ -z “$MySQL_PASSWORD” ]; then
-#echo Input MySQL_PASSWORD is missing
-#exit 1
-#fi
-#component=frontend
-#source common.sh
-#
-#Head "Install Nginx"
-#dnf install nginx -y &>>$log_file
-#Stat $?
-#
-#Head "Copy expense configuration"
-#cp expense.conf /etc/nginx/default.d/expense.conf &>>$log_file
-#Stat $?
-#
-#app_prereq "/usr/share/nginx/html"
-#
-#Head "Start Nginx services"
-#systemctl enable nginx &>>$log_file
-#systemctl restart nginx &>>$log_file
-#Stat $?
-
-- name: Frontend setup #optional
+- name: Frontend setup
   hosts: all
   become: true
   tasks:
@@ -30,3 +6,24 @@
       ansible.builtin.dnf:
         name: nginx
         state: installed
+
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: expense.conf
+        dest: /etc/nginx/default.d/expense.conf
+
+    - name: Delete existing app content
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: absent
+
+    - name: Download and extract app content
+      ansible.builtin.unarchive:
+        src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
+        dest: /usr/share/nginx/html
+
+    - name: Enable and restart Nginx services
+      ansible.builtin.systemd_service:
+        name: nginx
+        enabled: true
+        state: restarted
