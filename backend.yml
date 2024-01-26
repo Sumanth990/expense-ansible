@@ -21,7 +21,7 @@
 
     - name: Install nodeJS
       ansible.builtin.dnf:
-        name: NodeJS
+        name: nodejs
         state: installed
 
     - name: Configure backend service
@@ -61,7 +61,7 @@
 
     - name: Install MySQL client
       ansible.builtin.dnf:
-        src: Mysql
+        src: mysql
         state: installed
 
     - name: Load schema
