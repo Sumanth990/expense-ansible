@@ -69,6 +69,7 @@
         name: python3-PyMySQL
         state: installed
 
+
     - name: Load schema
       community.mysql.mysql_db:
         state: import
