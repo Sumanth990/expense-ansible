@@ -1,0 +1,65 @@
+- name: Disable default version of nodeJS
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: Enable nodeJS18 version
+  ansible.builtin.shell: dnf module enable nodejs:18 -y
+
+- name: Install nodeJS
+  ansible.builtin.dnf:
+    name: nodejs
+    state: installed
+
+- name: Configure backend service
+  ansible.builtin.copy:
+    src: backend.service
+    dest: /etc/systemd/system/backend.service
+
+- name: Adding application user
+  ansible.builtin.user:
+    name: expense
+
+- name: Remove existing app content
+  ansible.builtin.file:
+    path: /app
+    state: absent
+
+- name: Create application directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
+
+- name: Download and extract app content
+  ansible.builtin.unarchive:
+    src: https://expense-artifacts.s3.amazonaws.com/backend.zip
+    dest: /app
+    remote_src: true
+
+- name: Install application dependencies
+  community.general.npm:
+    path: /app
+
+- name: Reloading SystemD and start backend service
+  ansible.builtin.systemd.service:
+    name: backend
+    enabled: true
+    state: restarted
+
+- name: Install MySQL client
+  ansible.builtin.dnf:
+    name: mysql
+    state: installed
+
+- name: Install python library for MySQL
+  ansible.builtin.dnf:
+    name: python3-PyMySQL
+    state: installed
+
+
+- name: Load schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/schema/backend.sql
+    login_user: root
+    login_password: ExpenseApp@1
+    login_host: mysql-dev.aquireawsdevops.online
