@@ -1,0 +1,7 @@
+- name: Expense project setup
+  hosts: all
+  become: true
+  roles:
+    - {{ service_name }}
+
+
