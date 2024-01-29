@@ -26,7 +26,7 @@
 - name: Install application dependencies
   community.general.npm:
     name: vars
-    path: "{{ app_location }}" #/app # variable name?
+    path: {{ app_location }} #/app # variable name?
 
 - name: Reloading SystemD and start backend service
   ansible.builtin.systemd.service:

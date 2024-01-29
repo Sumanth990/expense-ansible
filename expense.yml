@@ -2,6 +2,11 @@
   hosts: all
   become: true
   roles:
-    - name: "{{ service_name }}"
+    - "{{ service_name }}" # play level roles
 
 
+##original way or classic way
+#- hosts: webservers
+#  roles:
+#    - common
+#    - webservers
