@@ -20,12 +20,13 @@
 
 - name: App Pre-Requisites
   ansible.builtin.include_role:
-    name: common
+    name: common # role name
     tasks_from: app_prereq
 
 - name: Install application dependencies
   community.general.npm:
-    path: /app
+    name: vars
+    path: {{ app_location }} #/app # variable name?
 
 - name: Reloading SystemD and start backend service
   ansible.builtin.systemd.service:
