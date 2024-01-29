@@ -2,6 +2,6 @@
   hosts: all
   become: true
   roles:
-    - "{{ service_name }}"
+    "{{ service_name }}"
 
 
