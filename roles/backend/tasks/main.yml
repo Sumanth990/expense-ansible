@@ -25,7 +25,7 @@
 
 - name: Install application dependencies
   community.general.npm:
-    path: {{ app_location }}" #/app # variable name?
+    path: /app
 
 - name: Reloading SystemD and start backend service
   ansible.builtin.systemd.service: # module - enables and restarts the service
