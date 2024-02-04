@@ -3,7 +3,7 @@ pipelines:
   deploy: #name of the pipeline
     group: defaultGroup  # we can also create a group, let it be in default group.
     label_template: "foo-1.0-${COUNT}" #when we run the job go to history. Here are count instead of count we can add prefix
-    lock_behavior: true
+    lock_behavior: none
     display_order: -1 #default value
     materials:
       ansible:
