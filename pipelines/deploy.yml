@@ -17,12 +17,12 @@ pipelines:
           approval:
             type: manual
           jobs:
-          deployment:
-            timeout: 0
-            tasks:
-              - exec:
-                  command: ansible-playbook
-                  arguments: ["-i", "frontend-dev.aquireawsdevops.online,", "-e", "ansible_user=centos","-e", "ansible_password=DevOps321", "expense.yml"]
+            deployment:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ansible-playbook
+                    arguments: ["-i", "frontend-dev.aquireawsdevops.online,", "-e", "ansible_user=centos","-e", "ansible_password=DevOps321", "expense.yml"]
 
 
       - QA:
@@ -30,40 +30,40 @@ pipelines:
           approval:
             type: manual
           jobs:
-          deployment:
-            timeout: 0
-            tasks:
-              - exec:
-                  command: ls
-                  arguments:
-                    - -l
-                    - -A
+            deployment:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    arguments:
+                      - -l
+                      - -A
 
       - UAT:
           fetch_materials: true
           approval:
             type: manual
           jobs:
-          deployment:
-            timeout: 0
-            tasks:
-              - exec:
-                  command: ls
-                  arguments:
-                    - -l
-                    - -A
+            deployment:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    arguments:
+                      - -l
+                      - -A
 
       - PROD:
           fetch_materials: true
           approval:
             type: manual
           jobs:
-          deployment:
-            timeout: 0
-            tasks:
-              - exec:
-                  command: ls
-                  arguments:
-                    - -l
-                    - -A
+            deployment:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    arguments:
+                      - -l
+                      - -A
 
