@@ -12,17 +12,17 @@ pipelines:
         auto_update: true
         branch: main
     stages:
-      - dev:
-          fetch_materials: true
-          approval:
-            type: manual
-          jobs:
-            deployment:
-              timeout: 0
-              tasks:
-                - exec:
-                  command: ls
-                  arguments:
+    - dev:
+        fetch_materials: true
+        approval:
+          type: manual
+        jobs:
+          deployment:
+            timeout: 0
+            tasks:
+            - exec:
+                command: ls
+                arguments:
                   - -l
                   - -A
 
