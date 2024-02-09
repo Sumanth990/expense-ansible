@@ -28,7 +28,7 @@
     path: /app
 
 - name: Reloading SystemD and start backend service
-  ansible.builtin.systemd.service: # module - enables and restarts the service
+  ansible.builtin.systemd_service: # module - enables and restarts the service
     name: backend # parameter = name by default it takes name of unit .service
 #/etc/systemd/system it will refer from here.(default path)
     enabled: true
