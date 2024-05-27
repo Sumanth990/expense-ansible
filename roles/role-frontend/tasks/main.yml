@@ -1,0 +1,30 @@
+#dnf install nginx -y
+- name: Install nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
+#rm -rf /usr/share/nginx/html/*
+- name: Remove default content
+  ansible.builtin.file:
+    path: /usr/share/nginx/html/*
+    state: absent
+#curl -o /tmp/frontend.zip https://expense-artifacts.s3.amazonaws.com/frontend.zip
+#cd /usr/share/nginx/html
+#unzip /tmp/frontend.zip
+- name: Download and Unarchive content of expense setup.
+  ansible.builtin.unarchive:
+    src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+#cp expense.conf /etc/nginx/default.d/expense.conf
+- name: Copy config file
+  ansible.builtin.copy:
+    src: expense.conf
+    dest: /etc/nginx/default.d/expense.conf
+#systemctl enable nginx
+#systemctl start nginx
+- name: Enable and start nginx services
+  ansible.builtin.systemd_service:
+    name: nginx
+    state: started
+    enabled: true

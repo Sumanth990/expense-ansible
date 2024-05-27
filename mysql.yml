@@ -1,39 +1,6 @@
 - name: mysql setup
   hosts: all
   become: yes
-  tasks:
-#dnf module disable mysql -y
-    - name: Disable mysql default version
-      ansible.builtin.shell:
-        cmd: dnf module disable mysql -y
-# cp mysql.repo /etc/yum.repos.d/mysql.repo
-    - name: Copy config file
-      ansible.builtin.copy:
-        src: mysql.repo
-        dest: /etc/yum.repos.d/mysql.repo
-#dnf install mysql-community-server -y
-    - name: Install mysql-community server
-      ansible.builtin.dnf:
-        name: mysql-community-server
-        state: installed
-#systemctl enable mysqld
-#systemctl start mysqld
-    - name: Enable and start mysqld service
-      ansible.builtin.systemd_service:
-        name: mysqld
-        state: started
-        enabled: true
-#dnf install python-PyMySQL
-    - name: Install python library for MySQL
-      ansible.builtin.dnf:
-        name: python3-PyMySQL
-        state: installed
-#mysql_secure_installation --set-root-pass ExpenseApp@1
-    - name: Set root password
-      ansible.builtin.shell: mysql_secure_installation --set-root-pass ExpenseApp@1
-#mysql -uroot -pExpenseApp@1
-    - name: login to DB
-      community.mysql.mysql_db:
-        name: mysql
-        login_user: root
-        login_password: ExpenseApp@1
+  roles:
+    - role-mysql
+
