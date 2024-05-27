@@ -36,6 +36,11 @@
       community.general.npm:
         name: npm
         path: /app
+#cp backend.service /etc/systemd/system/backend.service
+    - name: Copy backend service file
+      ansible.builtin.copy:
+        src: backend.service
+        dest: /etc/systemd/system/backend.service
 #systemctl daemon-reload
 #systemctl enable backend
 #systemctl start backend
