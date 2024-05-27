@@ -1,0 +1,18 @@
+#rm -rf /usr/share/nginx/html/*
+- name: Remove default content
+  ansible.builtin.file:
+    path: {{ app_location }}
+    state: absent
+
+- name: Create a directory for application
+  ansible.builtin.file:
+    path: {{ app_location }}
+    state: directory
+#  curl -o /tmp/{{component}}.zip https://expense-artifacts.s3.amazonaws.com/{{component}}.zip
+#  cd /app
+#  unzip /tmp/backend.zip
+- name: Download and Unarchive a file
+  ansible.builtin.unarchive:
+    src: https://expense-artifacts.s3.amazonaws.com/backend.zip
+    dest: {{ app_location }}
+    remote_src: yes
