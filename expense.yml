@@ -1,5 +1,5 @@
-- name: Frontend setup
+- name: Expense setup
   hosts: all
   become: true
   roles:
-    - "{{ service-name }}"
+    - "{{ service_name }}"
