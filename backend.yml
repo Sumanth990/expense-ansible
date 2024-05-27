@@ -55,6 +55,11 @@
       ansible.builtin.dnf:
         name: mysql
         state: latest
+#dnf install -y python3-PyMySQL
+    - name: Install python library for MySQL
+      ansible.builtin.dnf:
+        name: python3-PyMySQL
+        state: installed
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
     - name: Load schema
       community.mysql.mysql_db:
@@ -64,4 +69,3 @@
         login_password: ExpenseApp@1
         login_host: mysql-dev.aquireawsdevops.online
         target: /app/schema/backend.sql
-
