@@ -44,7 +44,7 @@
         name: backend
         state: started
         daemon_reload: true
-        enable: yes
+        enabled: yes
 #dnf install mysql -y
     - name: Install mysql client
       ansible.builtin.dnf:
