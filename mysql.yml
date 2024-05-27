@@ -34,7 +34,7 @@
 #mysql -uroot -pExpenseApp@1
     - name: login to DB
       community.mysql.mysql_db:
-        name: mysql
+        #name: mysql
         login_user: root
         login_password: ExpenseApp@1
 
