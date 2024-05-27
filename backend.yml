@@ -8,7 +8,7 @@
         cmd: dnf module disable nodejs -y
 #    dnf module enable nodejs:22 -y
     - name: Disable default version of nodejs
-      ansible.builtin.shell: dnf module disable nodejs -y
+      ansible.builtin.shell: dnf module enable nodejs:22 -y
 #      dnf install nodejs -y
     - name: Install nodejs22 version
       ansible.builtin.dnf:
