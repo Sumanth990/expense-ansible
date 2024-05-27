@@ -50,12 +50,12 @@
         name: mysql
         state: latest
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
-- name: Load schema
-  community.mysql.mysql_db:
-    name: all
-    state: import
-    login_user: root
-    login_password: ExpenseApp@1
-    login_host: mysql-dev.aquireawsdevops.online
-    target: /app/schema/backend.sql
+    - name: Load schema
+      community.mysql.mysql_db:
+        name: all
+        state: import
+        login_user: root
+        login_password: ExpenseApp@1
+        login_host: mysql-dev.aquireawsdevops.online
+        target: /app/schema/backend.sql
 
