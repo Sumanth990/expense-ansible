@@ -5,7 +5,7 @@
 #dnf module disable mysql -y
     - name: Disable mysql default version
       ansible.builtin.shell:
-        - cmd: dnf module disable mysql -y
+        cmd: dnf module disable mysql -y
 # cp mysql.repo /etc/yum.repos.d/mysql.repo
     - name: Copy config file
       ansible.builtin.copy:
