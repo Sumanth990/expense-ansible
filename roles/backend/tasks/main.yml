@@ -58,6 +58,6 @@
     name: all
     state: import
     login_user: root
-    login_password: ExpenseApp@1
+    login_password: "{{ lookup('amazon.aws.aws_ssm', 'dev.mysql.root_password', region='us-east-1' ) }}"
     login_host: mysql-dev.aquireawsdevops.online
     target: /app/schema/backend.sql
