@@ -47,7 +47,6 @@
   loop:
     - python3-PyMySQL
     - mysql
-
 #dnf install -y python3-PyMySQL
 - name: Install python library for MySQL
   ansible.builtin.dnf:
