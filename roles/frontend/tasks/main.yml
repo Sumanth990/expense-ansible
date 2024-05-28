@@ -11,7 +11,7 @@
 
 #cp expense.conf /etc/nginx/default.d/expense.conf
 - name: Copy config file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: expense.conf
     dest: /etc/nginx/default.d/expense.conf
 #systemctl enable nginx
