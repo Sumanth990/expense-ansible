@@ -22,5 +22,8 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    command: ls -l
+                    command: ls
+                    arguments:
+                      - -l
+                      - -A
                     run_if: passed
