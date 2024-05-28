@@ -1,0 +1,24 @@
+#ansible-playbook -i frontend-dev.aquireawsdevops.online, -e ansible_user=centos -e ansible_password=DevOps321 expense.yml -e service_name=frontend -e env=dev
+
+
+#two ways of writing a command with argument:
+
+#spacing:
+
+command: ansible-playbook
+arguments:
+  - -i
+  - frontend-dev.aquireawsdevops.online,
+  - -e
+  - ansible_user=centos
+  - -e
+  - ansible_password=DevOps321
+  - expense.yml
+  - -e
+  - service_name=frontend
+  - -e
+  - env=dev
+
+#[]
+command: ansible-playbook
+arguments: ["-i", "frontend-dev.aquireawsdevops.online,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "expense.yml", "-e", "service_name=frontend", "-e", "env=dev"]
