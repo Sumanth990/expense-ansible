@@ -42,7 +42,7 @@
 #dnf install mysql -y
 - name: Install mysql client
   ansible.builtin.dnf:
-    name: {{ item }}
+    name: "{{ item }}"
     state: latest
   loop:
     - python3-PyMySQL
