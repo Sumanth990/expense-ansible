@@ -55,11 +55,14 @@
     name: python3-PyMySQL
     state: installed
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
+#- name: Load schema
+#  community.mysql.mysql_db:
+#    name: all
+#    state: import
+#    login_user: root
+#    login_password: "{{ lookup('amazon.aws.aws_ssm', 'dev.mysql.root_password', region='us-east-1' ) }}"
+#    login_host: mysql-dev.aquireawsdevops.online
+#    target: /app/schema/backend.sql
+
 - name: Load schema
-  community.mysql.mysql_db:
-    name: all
-    state: import
-    login_user: root
-    login_password: "{{ lookup('amazon.aws.aws_ssm', 'dev.mysql.root_password', region='us-east-1' ) }}"
-    login_host: mysql-dev.aquireawsdevops.online
-    target: /app/schema/backend.sql
+  ansible.builtin.shell: mysql -h mysql-dev.aquireawsdevops.online -uroot -p{{ lookup('amazon.aws.aws_ssm', 'dev.mysql.root_password', region='us-east-1' ) }} < /app/schema/backend.sql
