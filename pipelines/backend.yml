@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  deploy:
+  backend:
     group: defaultGroup
     label_template: ${COUNT}
     lock_behavior: none
@@ -21,18 +21,18 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-#ansible-playbook -i frontend-dev.aquireawsdevops.online, -e ansible_user=centos -e ansible_password=DevOps321 expense.yml -e service_name=frontend -e env=dev
+#ansible-playbook -i backend-dev.aquireawsdevops.online, -e ansible_user=centos -e ansible_password=DevOps321 expense.yml -e service_name=backend -e env=dev
                     command: ansible-playbook
                     arguments:
                       - -i
-                      - frontend-dev.aquireawsdevops.online,
+                      - backend-dev.aquireawsdevops.online,
                       - -e
                       - ansible_user=centos
                       - -e
                       - ansible_password=DevOps321
                       - expense.yml
                       - -e
-                      - service_name=frontend
+                      - service_name=backend
                       - -e
                       - env=dev
 
