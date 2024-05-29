@@ -22,7 +22,6 @@
 #npm install
 - name: Install npm dependencies
   community.general.npm:
-    name: npm
     path: /app
 #cp backend.service /etc/systemd/system/backend.service
 - name: Copy backend service file
