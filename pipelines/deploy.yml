@@ -35,7 +35,7 @@ pipelines:
                       - service_name=frontend
                       - -e
                       - env=dev
-                    run_if: passed
+
       - QA:
           fetch_materials: true
           approval:
@@ -50,7 +50,7 @@ pipelines:
                     arguments:
                       - -l
                       - -A
-                    run_if: passed
+
       - UAT:
           fetch_materials: true
           approval:
@@ -65,7 +65,7 @@ pipelines:
                     arguments:
                       - -l
                       - -A
-                    run_if: passed
+
       - PROD:
           fetch_materials: true
           approval:
@@ -80,4 +80,3 @@ pipelines:
                     arguments:
                       - -l
                       - -A
-                    run_if: passed
