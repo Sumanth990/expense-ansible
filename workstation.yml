@@ -22,7 +22,7 @@
           name:
               - boto3
               - botocore
-              -
+
     - name: Enable and restart go-agent
       ansible.builtin.systemd_service:
           name: go-agent
