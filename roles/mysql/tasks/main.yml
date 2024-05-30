@@ -28,8 +28,8 @@
 - name: Set root password
   ansible.builtin.shell: mysql_secure_installation --set-root-pass "{{ lookup('amazon.aws.aws_ssm', 'dev.mysql.root_password', region='us-east-1' ) }}"
 #mysql -uroot -pExpenseApp@1
-- name: login to DB
-  community.mysql.mysql_db:
-    name: mysql
-    login_user: root
-    login_password: "{{ lookup('amazon.aws.aws_ssm', 'dev.mysql.root_password', region='us-east-1' ) }}"
+#- name: login to DB
+#  community.mysql.mysql_db:
+#    name: mysql
+#    login_user: root
+#    login_password: "{{ lookup('amazon.aws.aws_ssm', 'dev.mysql.root_password', region='us-east-1' ) }}"
