@@ -1,0 +1,78 @@
+format_version: 10
+pipelines:
+  workstation:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      ansible:
+        git: https://github.com/Sumanth990/expense-ansible.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - DEV:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            deployment:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ansible-playbook
+                    arguments:
+                      - -i
+                      - 172.31.31.59,
+                      - -e
+                      - ansible_user=centos
+                      - -e
+                      - ansible_password=DevOps321
+                      - workstation.yml
+
+
+      - QA:
+          fetch_materials: true
+          approval:
+            type: manual
+            allow_only_on_success: true
+          jobs:
+            deployment:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    arguments:
+                      - -l
+                      - -A
+
+      - UAT:
+          fetch_materials: true
+          approval:
+            type: manual
+            allow_only_on_success: true
+          jobs:
+            deployment:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    arguments:
+                      - -l
+                      - -A
+
+      - PROD:
+          fetch_materials: true
+          approval:
+            type: manual
+            allow_only_on_success: true
+          jobs:
+            deployment:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    arguments:
+                      - -l
+                      - -A
