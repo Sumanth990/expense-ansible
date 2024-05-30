@@ -1,5 +1,5 @@
 - name: go-agent
-  hosts: all
+  hosts: localhost
   become: true
   roles:
     - workstation-setup

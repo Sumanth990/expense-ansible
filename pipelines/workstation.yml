@@ -23,12 +23,6 @@ pipelines:
                 - exec:
                     command: ansible-playbook
                     arguments:
-                      - -i
-                      - 172.31.31.59,
-                      - -e
-                      - ansible_user=centos
-                      - -e
-                      - ansible_password=DevOps321
                       - workstation.yml
 
 
