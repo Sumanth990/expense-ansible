@@ -1,6 +1,5 @@
 - name: go-agent
 - hosts: localhost
-- become: true
 - tasks:
     - name: Download go-agent repo file
       ansible.builtin.get_url:
