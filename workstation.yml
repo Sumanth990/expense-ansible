@@ -1,0 +1,5 @@
+- name: go-agent
+- hosts: all
+- become: true
+- roles:
+    - workstation
