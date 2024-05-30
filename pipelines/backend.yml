@@ -21,6 +21,7 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
+
 #ansible-playbook -i backend-dev.aquireawsdevops.online, -e ansible_user=centos -e ansible_password=DevOps321 expense.yml -e service_name=backend -e env=dev
                     command: ansible-playbook
                     arguments:
