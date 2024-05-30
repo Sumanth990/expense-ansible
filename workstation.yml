@@ -27,4 +27,4 @@
       ansible.builtin.systemd_service:
           name: go-agent
           enable: true
-          state: installed
+          state: restarted
