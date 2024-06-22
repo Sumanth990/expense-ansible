@@ -13,6 +13,6 @@
 #  unzip /tmp/backend.zip
 - name: Download and Unarchive a file
   ansible.builtin.unarchive:
-    src: https://expense-artifacts.s3.amazonaws.com/backend.zip
+    src: https://expense-artifacts.s3.amazonaws.com/{{component}}.zip
     dest: "{{ app_location }}"
     remote_src: yes
