@@ -1,0 +1,68 @@
+-  name: Backend setup
+   hosts: all
+   become: true
+   tasks:
+#dnf module disable nodejs -y
+     - name: Disable default version of nodejs
+       ansible.builtin.shell: dnf module disable nodejs -y
+#dnf module enable nodejs:18 -y
+     - name: Enable nodejs18 version
+       ansible.builtin.shell:
+         cmd: dnf module enable nodejs:18 -y
+#dnf install nodejs -y
+     - name: Install nodejs
+       ansible.builtin.dnf:
+         name: nodejs
+         state: Installed
+#useradd expense
+     - name: Add application user.
+       ansible.builtin.user:
+         name: expense
+#mkdir /app
+     - name: Create application directory
+       ansible.builtin.file:
+         path: /app
+         state: directory
+#curl -o /tmp/backend.zip https://expense-artifacts.s3.amazonaws.com/backend.zip
+#cd /app
+#unzip /tmp/backend.zip
+     - name: Download and extract application content
+       ansible.builtin.unarchive:
+         src: https://expense-artifacts.s3.amazonaws.com/backend.zip
+         dest: /app
+         remote_src: yes
+#npm install
+     - name: Install npm dependencies
+       ansible.builtin.dnf:
+         name: npm
+         state: installed
+#     - name: Install npm dependencies
+#       community.general.npm:
+#         name: npm
+#         path: /app
+#/etc/systemd/system/backend.service
+     - name: Copy service files
+       ansible.builtin.copy:
+         src: backend.service
+         dest: /etc/systemd/system/backend.service
+#systemctl daemon-reload
+#systemctl enable backend
+#systemctl start backend
+     - name: Daemon-reload, enable and restart backend services
+       ansible.builtin.systemd_service:
+         name: backend
+         enabled: true
+         daemon-reload: true
+#dnf install mysql -y
+     - name: Install mysql
+       ansible.builtin.dnf:
+         state: present
+#mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
+     - name:
+       community.mysql.mysql_db:
+         state: import
+         name: mysql
+         login_user: root
+         login_password: ExpenseApp@1
+         login_host: mysql-dev.aquireawsdevops.online
+         target: /app/schema/backend.sql
