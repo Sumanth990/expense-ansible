@@ -1,5 +1,6 @@
 - name: Frontend setup
   hosts: all
+  become: true
   tasks:
 #dnf install nginx
     - name: Install nginx
