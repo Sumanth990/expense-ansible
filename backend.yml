@@ -13,7 +13,7 @@
      - name: Install nodejs
        ansible.builtin.dnf:
          name: nodejs
-         state: Installed
+         state: installed
 #useradd expense
      - name: Add application user.
        ansible.builtin.user:
