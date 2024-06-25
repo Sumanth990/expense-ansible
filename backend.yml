@@ -68,7 +68,7 @@
      - name: load schema
        community.mysql.mysql_db:
          state: import
-         name: mysql
+         name: all
          login_user: root
          login_password: ExpenseApp@1
          login_host: mysql-dev.aquireawsdevops.online
