@@ -4,7 +4,7 @@ hosts: all
   - name: Install nginx
     ansible.builtin.dnf:
        name: nginx
-       state: latest
+       state: present
 #rm -rf /usr/share/nginx/html/*
 #curl -o /tmp/frontend.zip https://expense-artifacts.s3.amazonaws.com/frontend.zip
 #cd /usr/share/nginx/html
