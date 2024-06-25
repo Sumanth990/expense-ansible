@@ -1,10 +1,9 @@
 name: Frontend setup
 hosts: all
-  #dnf install nginx -y
   - name: Install nginx
     ansible.builtin.dnf:
-       name: nginx
-       state: present
+      name: nginx
+      state: present
 #rm -rf /usr/share/nginx/html/*
 #curl -o /tmp/frontend.zip https://expense-artifacts.s3.amazonaws.com/frontend.zip
 #cd /usr/share/nginx/html
