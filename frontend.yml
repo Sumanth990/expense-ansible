@@ -1,6 +1,6 @@
-#dnf install nginx -y
 name: Frontend setup
 hosts: all
+  #dnf install nginx -y
   - name: Install nginx
     ansible.builtin.dnf:
        name: nginx
