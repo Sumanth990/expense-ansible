@@ -56,9 +56,16 @@
 #dnf install mysql -y
      - name: Install mysql
        ansible.builtin.dnf:
+         name: mysql
          state: present
+#dnf install python3-PyMySQL -y
+     - name: Install PyMySQL
+       ansible.builtin.dnf:
+         name: python3-PyMySQL
+         state: present
+
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
-     - name:
+     - name: load schema
        community.mysql.mysql_db:
          state: import
          name: mysql
