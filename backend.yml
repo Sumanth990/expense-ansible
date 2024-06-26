@@ -1,5 +1,5 @@
--  name: Backend setup
-   hosts: all
-   become: true
-   roles:
-     backend
+- name: Backend setup
+  hosts: all
+  become: true
+  roles:
+    - backend
