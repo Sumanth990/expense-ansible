@@ -1,61 +1,71 @@
 #dnf module disable nodejs -y
 - name: Disable default version of nodejs
+  ansible.builtin.shell: dnf module disable nodejs -y
+#dnf module enable nodejs:18 -y
+- name: Enable nodejs18 version
   ansible.builtin.shell:
-    cmd: dnf module disable nodejs -y
-#    dnf module enable nodejs:20 -y
-- name: Enable nodejs20 version
-  ansible.builtin.shell: dnf module enable nodejs:20 -y
-#      dnf install nodejs -y
+    cmd: dnf module enable nodejs:18 -y
+#dnf install nodejs -y
 - name: Install nodejs
   ansible.builtin.dnf:
     name: nodejs
-    state: present
-#        useradd expense
-- name: Add the user 'expense'
+    state: installed
+#useradd expense
+- name: Add application user.
   ansible.builtin.user:
     name: expense
-
-- name: App Pre-Requisites
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: app_prereq
+#mkdir /app
+- name: Create application directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
+#curl -o /tmp/backend.zip https://expense-artifacts.s3.amazonaws.com/backend.zip
+#cd /app
+#unzip /tmp/backend.zip
+- name: Download and extract application content
+  ansible.builtin.unarchive:
+    src: https://expense-artifacts.s3.amazonaws.com/backend.zip
+    dest: /app
+    remote_src: yes
 #npm install
 - name: Install npm dependencies
-  community.general.npm:
-    path: /app
-#cp backend.service /etc/systemd/system/backend.service
-- name: Copy backend service file
-  ansible.builtin.template:
+  ansible.builtin.dnf:
+    name: npm
+    state: installed
+#     - name: Install npm dependencies
+#       community.general.npm:
+#         name: npm
+#         path: /app
+#/etc/systemd/system/backend.service
+- name: Copy service files
+  ansible.builtin.copy:
     src: backend.service
     dest: /etc/systemd/system/backend.service
 #systemctl daemon-reload
 #systemctl enable backend
 #systemctl start backend
-- name: Daemon-reload, enable and start backend services
+- name: Daemon-reload, enable and restart backend services
   ansible.builtin.systemd_service:
     name: backend
-    state: restarted
-    daemon_reload: true
-    enabled: yes
+    enabled: true
+    daemon-reload: true
 #dnf install mysql -y
-- name: Install mysql client
+- name: Install mysql
   ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - python3-PyMySQL
-    - mysql
-#dnf install -y python3-PyMySQL
-- name: Install python library for MySQL
+    name: mysql
+    state: present
+#dnf install python3-PyMySQL -y
+- name: Install PyMySQL
   ansible.builtin.dnf:
     name: python3-PyMySQL
-    state: installed
+    state: present
+
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
-- name: Load schema
+- name: load schema
   community.mysql.mysql_db:
-    name: all
     state: import
-    login_user: "{{ lookup('amazon.aws.aws_ssm', '{{env}}.expense.rds.username', region='us-east-1' ) }}"
-    login_password: "{{ lookup('amazon.aws.aws_ssm', '{{env}}.expense.rds.password', region='us-east-1' ) }}"
-    login_host: "{{ lookup('amazon.aws.aws_ssm', '{{env}}.expense.rds.endpoint', region='us-east-1' ) }}"
-    target: /app/schema/backend.sql #load schema
+    name: all
+    login_user: root
+    login_password: ExpenseApp@1
+    login_host: mysql-dev.aquireawsdevops.online
+    target: /app/schema/backend.sql

@@ -1,39 +1,5 @@
 - name: Frontend setup
   hosts: all
   become: true
-  tasks:
-#dnf install nginx
-    - name: Install nginx
-      ansible.builtin.dnf:
-        name: nginx
-        state: present
-#rm -rf /usr/share/nginx/html/*
-    - name: Recursively remove directory
-      ansible.builtin.file:
-        path: /usr/share/nginx/html/
-        state: absent
-#mkdir /usr/share/nginx/html/
-    - name: Create a directory if it does not exist
-      ansible.builtin.file:
-        path: /usr/share/nginx/html/
-        state: directory
-#curl -o /tmp/frontend.zip https://expense-artifacts.s3.amazonaws.com/frontend.zip
-#cd /usr/share/nginx/html
-#unzip /tmp/frontend.zip
-    - name: Download and extract content of application
-      ansible.builtin.unarchive:
-        src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
-        dest: /usr/share/nginx/html
-        remote_src: yes
-#cp  expense.conf /etc/nginx/default.d/expense.conf
-    - name: Copy conf files
-      ansible.builtin.copy:
-        src: expense.conf
-        dest: /etc/nginx/default.d/expense.conf
-#systemctl enable nginx
-#systemctl start nginx
-    - name: Enable and restart nginx service
-      ansible.builtin.systemd_service:
-        name: nginx
-        state: restarted
-        enabled: true
+  roles:
+    frontend
