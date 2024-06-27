@@ -1,18 +1,35 @@
-#rm -rf /usr/share/nginx/html/*
-- name: Remove default content of application directory
+##rm -rf /usr/share/nginx/html/*
+#- name: Remove default content of application directory
+#  ansible.builtin.file:
+#    path: "{{ app_location }}"
+#    state: absent
+##mkdir /usr/share/nginx/html/
+#- name: Create application directory
+#  ansible.builtin.file:
+#    path: "{{ app_location }}"
+#    state: directory
+##curl -o /tmp/frontend.zip https://expense-artifacts.s3.amazonaws.com/frontend.zip
+##cd /usr/share/nginx/html
+##unzip /tmp/frontend.zip
+#- name: Download and extract content of application
+#  ansible.builtin.unarchive:
+#    src: https://expense-artifacts.s3.amazonaws.com/{{ component }}.zip
+#    dest: "{{ app_location }}"
+#    remote_src: yes
+
+
+- name: Remove existing App content
   ansible.builtin.file:
     path: "{{ app_location }}"
     state: absent
-#mkdir /usr/share/nginx/html/
-- name: Create application directory
+
+- name: Create Application Directory
   ansible.builtin.file:
     path: "{{ app_location }}"
     state: directory
-#curl -o /tmp/frontend.zip https://expense-artifacts.s3.amazonaws.com/frontend.zip
-#cd /usr/share/nginx/html
-#unzip /tmp/frontend.zip
-- name: Download and extract content of application
+
+- name: Download and extract app content
   ansible.builtin.unarchive:
     src: https://expense-artifacts.s3.amazonaws.com/{{ component }}.zip
     dest: "{{ app_location }}"
-    remote_src: yes
+    remote_src: true
