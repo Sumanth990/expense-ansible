@@ -30,7 +30,7 @@
 #         path: /app
 #/etc/systemd/system/backend.service
 - name: Copy service files
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: backend.service
     dest: /etc/systemd/system/backend.service
 #systemctl daemon-reload

@@ -3,7 +3,7 @@
   ansible.builtin.shell: dnf module disable mysql -y
 #/etc/yum.repos.d/mysql.repo
 - name: Copy repo files
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: mysql.repo
     dest: /etc/yum.repos.d/mysql.repo
 #dnf install mysql-community-server -y
