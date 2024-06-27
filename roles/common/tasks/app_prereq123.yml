@@ -1,5 +1,5 @@
 - name: common
-  hosts: all
+  hosts: localhost
   become: true
   tasks:
     - name: Remove existing App content
