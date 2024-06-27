@@ -47,9 +47,9 @@
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
-    loop:
-      - mysql
-      - python3-PyMySQL
+  loop:
+    - mysql
+    - python3-PyMySQL
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
 - name: load schema
   community.mysql.mysql_db:
