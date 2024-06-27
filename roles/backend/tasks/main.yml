@@ -45,7 +45,7 @@
 #dnf install python3-PyMySQL -y
 - name: Install mysql and python3-PyMySQL
   ansible.builtin.dnf:
-    name: "{{ items }}"
+    name: "{{ item }}"
     state: present
     loop:
       - mysql
