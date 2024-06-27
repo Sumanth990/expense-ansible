@@ -24,6 +24,7 @@
   ansible.builtin.dnf:
     name: npm
     state: installed
+    path: /app
 #     - name: Install npm dependencies
 #       community.general.npm:
 #         name: npm

@@ -1,10 +1,10 @@
 #rm -rf /usr/share/nginx/html/*
-- name: Recursively remove directory
+- name: Remove default content of application directory
   ansible.builtin.file:
     path: "{{app_location}}"
     state: absent
 #mkdir /usr/share/nginx/html/
-- name: Create a directory if it does not exist
+- name: Create application directory
   ansible.builtin.file:
     path: "{{app_location}}"
     state: directory
