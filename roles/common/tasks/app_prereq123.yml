@@ -4,16 +4,16 @@
   tasks:
     - name: Remove existing App content
       ansible.builtin.file:
-        path: "{{ app_location }}"
+        path: /app
         state: absent
 
     - name: Create Application Directory
       ansible.builtin.file:
-        path: "{{ app_location }}"
+        path: /app
         state: directory
 
     - name: Download and extract app content
       ansible.builtin.unarchive:
-        src: https://expense-artifacts.s3.amazonaws.com/{{ component }}.zip
-        dest: "{{ app_location }}"
+        src: https://expense-artifacts.s3.amazonaws.com/backend.zip
+        dest: /app
         remote_src: true
