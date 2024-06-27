@@ -42,16 +42,14 @@
     enabled: true
     daemon-reload: true
 #dnf install mysql -y
-- name: Install mysql
-  ansible.builtin.dnf:
-    name: mysql
-    state: present
 #dnf install python3-PyMySQL -y
-- name: Install PyMySQL
+- name: Install mysql and python3-PyMySQL
   ansible.builtin.dnf:
-    name: python3-PyMySQL
+    name: "{{ items }}"
     state: present
-
+    loop:
+      - mysql
+      - python3-PyMySQL
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
 - name: load schema
   community.mysql.mysql_db:
