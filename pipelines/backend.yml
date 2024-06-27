@@ -33,7 +33,7 @@ pipelines:
                       - ansible_password=DevOps321
                       - expense.yml
                       - -e
-                      - service_name=backend
+                      - role_name=backend
                       - -e
                       - env=dev
 
